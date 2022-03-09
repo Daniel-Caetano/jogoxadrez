@@ -16,7 +16,7 @@ namespace xadrez
         {
             bool[,] matrizMovimentos = new bool[Tab.Linhas, Tab.Colunas];
 
-            //teste// 
+            //Movimentação// 
             Posicao posicao = new Posicao(0, 0);
 
             //Norte
@@ -63,7 +63,8 @@ namespace xadrez
                 }
                 posicao.Coluna = posicao.Coluna - 1;
             }
-            //
+            //Fim movimentação
+
             return matrizMovimentos;
         }
         public override string ToString()

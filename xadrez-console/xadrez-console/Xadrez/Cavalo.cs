@@ -16,64 +16,60 @@ namespace xadrez
         {
             bool[,] matrizMovimentos = new bool[Tab.Linhas, Tab.Colunas];
 
-            //teste// 
+            //Movimentação// 
             Posicao posicao = new Posicao(0, 0);
-            //Norte 
-            posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna);
 
+            //Norte curto Leste longo 1
+            posicao.DefinirValores(Posicao.Linha - 1 , Posicao.Coluna + 2);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            //Nordeste 
-            posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna + 1);
-
+            //Norte longo Leste curto 2
+            posicao.DefinirValores(Posicao.Linha - 2, Posicao.Coluna + 1);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            //Leste
-            posicao.DefinirValores(posicao.Linha, posicao.Coluna + 1);
-
+            //Norte curto Oeste longo 3
+            posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 2);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            //Suldeste 
-            posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna + 1);
-
+            //Norte longo Oeste curto 4
+            posicao.DefinirValores(Posicao.Linha - 2, Posicao.Coluna - 1);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            //Sul
-            posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna);
-
+            //Sul curto Leste longo 5
+            posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 2);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            //Suldoeste
-            posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna - 1);
-
+            //Sul longo Leste curto 6
+            posicao.DefinirValores(Posicao.Linha + 2, Posicao.Coluna + 1);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            //Oeste
-            posicao.DefinirValores(posicao.Linha, posicao.Coluna - 1);
-
+            //Sul curto Oeste longo 7
+            posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 2);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
-            //Noroeste
-            posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna - 1);
-
+            //Sul longo Oeste curto 8
+            posicao.DefinirValores(Posicao.Linha + 2, Posicao.Coluna - 1);
             if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
             {
                 matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
             }
+
+            //FIM movimentação
+
             return matrizMovimentos;
         }
         public override string ToString()

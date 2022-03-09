@@ -10,70 +10,71 @@ namespace xadrez
         public bool PodeMover(Posicao pos)
         {
             Peca peca = Tab.Peca(pos);
-            return peca == null || peca.Cor != Cor;
+            return peca == null;
+            //|| peca.Cor != Cor
         }
+        public bool PodeMoverVertical(Posicao pos)
+        {
+            Peca peca = Tab.Peca(pos);
+            return peca != null && peca.Cor != Cor;
+            //|| peca.Cor != Cor
+        }
+
         public override bool[,] MovimentosPossiveis()
         {
             bool[,] matrizMovimentos = new bool[Tab.Linhas, Tab.Colunas];
 
-            //teste// 
+            //Movimentação// 
             Posicao posicao = new Posicao(0, 0);
-            //Norte 
-            posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna);
-
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
+            if (Cor == Cor.Branca)
             {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
-            }
-            //Nordeste 
-            posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna + 1);
+                //Norte 
+                posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna);
 
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
-            }
-            //Leste
-            posicao.DefinirValores(posicao.Linha, posicao.Coluna + 1);
+                if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
+                {
+                    matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                }
+                //Nordeste 
+                posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna + 1);
 
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
-            }
-            //Suldeste 
-            posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna + 1);
+                if (Tab.PosicaoValida(posicao) && PodeMoverVertical(posicao))
+                {
+                    matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                }
+                //Noroeste
+                posicao.DefinirValores(Posicao.Linha - 1, Posicao.Coluna - 1);
 
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                if (Tab.PosicaoValida(posicao) && PodeMoverVertical(posicao))
+                {
+                    matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                }
             }
-            //Sul
-            posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna);
+            else
+            {
+                //Sul
+                posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna);
 
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
-            }
-            //Suldoeste
-            posicao.DefinirValores(posicao.Linha + 1, posicao.Coluna - 1);
+                if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
+                {
+                    matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                }
+                //Suldeste 
+                posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna + 1);
 
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
-            }
-            //Oeste
-            posicao.DefinirValores(posicao.Linha, posicao.Coluna - 1);
+                if (Tab.PosicaoValida(posicao) && PodeMoverVertical(posicao))
+                {
+                    matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                }
+                //Suldoeste
+                posicao.DefinirValores(Posicao.Linha + 1, Posicao.Coluna - 1);
 
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                if (Tab.PosicaoValida(posicao) && PodeMoverVertical(posicao))
+                {
+                    matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
+                }
             }
-            //Noroeste
-            posicao.DefinirValores(posicao.Linha - 1, posicao.Coluna - 1);
-
-            if (Tab.PosicaoValida(posicao) && PodeMover(posicao))
-            {
-                matrizMovimentos[posicao.Linha, posicao.Coluna] = true;
-            }
+            //Fim movimentação
             return matrizMovimentos;
         }
         public override string ToString()
