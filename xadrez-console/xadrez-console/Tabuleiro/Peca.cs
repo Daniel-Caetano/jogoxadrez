@@ -18,6 +18,21 @@
         {
             this.QteMovimentos++;
         }
+        public bool ExisteMovimentosPossiveis()
+        {
+            bool[,] movimentos = MovimentosPossiveis();
+            for (int i = 0; i < Tab.Linhas; i++)    
+            {
+                for (int j = 0; j < Tab.Colunas; j++)
+                {
+                    if (movimentos[i,j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
         public abstract bool[,] MovimentosPossiveis();
     }
 }
