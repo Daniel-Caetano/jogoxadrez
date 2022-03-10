@@ -36,6 +36,25 @@ namespace xadrez
             {
                 capturadas.Add(pecaCapturada);
             }
+            //#Jogada especial: Roque Pequeno
+            if(peca is Rei && destino.Coluna == origem.Coluna +2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca torre = Tab.RetirarPeca(origemTorre);
+                torre.IncrementarQteMoviemntos();
+                Tab.ColocarPeca(torre, destinoTorre);
+            }
+            //#Jogada especial: Roque Grande
+            if (peca is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca torre = Tab.RetirarPeca(origemTorre);
+                torre.IncrementarQteMoviemntos();
+                Tab.ColocarPeca(torre, destinoTorre);
+            }
+
             return pecaCapturada;
         }
         public void RealizaJogada(Posicao origem, Posicao destino)
@@ -75,6 +94,25 @@ namespace xadrez
                 capturadas.Remove(pecaCapturada);
             }
             Tab.ColocarPeca(peca, origem);
+
+            //#Desfazer Jogada especial: Roque Pequeno
+            if (peca is Rei && destino.Coluna == origem.Coluna + 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna + 3);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna + 1);
+                Peca torre = Tab.RetirarPeca(destinoTorre);
+                torre.DecrementarQteMoviemntos();
+                Tab.ColocarPeca(torre, origemTorre);
+            }
+            //#Desfazer Jogada especial: Roque Grande
+            if (peca is Rei && destino.Coluna == origem.Coluna - 2)
+            {
+                Posicao origemTorre = new Posicao(origem.Linha, origem.Coluna - 4);
+                Posicao destinoTorre = new Posicao(origem.Linha, origem.Coluna - 1);
+                Peca torre = Tab.RetirarPeca(destinoTorre);
+                torre.DecrementarQteMoviemntos();
+                Tab.ColocarPeca(torre, origemTorre);
+            }
         }
         private void MudaJogador()
         {
@@ -214,49 +252,39 @@ namespace xadrez
         public void ColocarPeca()
         {
 
+            ColocarNovaPeca('a', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('b', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('c', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('d', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('e', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('f', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('g', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('h', 2, new Peao(Tab, Cor.Branca));
+            ColocarNovaPeca('a', 1, new Torre(Tab, Cor.Branca));
+            //ColocarNovaPeca('b', 1, new Cavalo(Tab, Cor.Branca));
+            //ColocarNovaPeca('c', 1, new Bispo(Tab, Cor.Branca));
+            ColocarNovaPeca('e', 1, new Rei(Tab, Cor.Branca, this));
+           // ColocarNovaPeca('d', 1, new Dama(Tab, Cor.Branca));
+            //ColocarNovaPeca('f', 1, new Bispo(Tab, Cor.Branca));
+            //ColocarNovaPeca('g', 1, new Cavalo(Tab, Cor.Branca));
+            ColocarNovaPeca('h', 1, new Torre(Tab, Cor.Branca));
 
-
-            ColocarNovaPeca('a', 8, new Rei(Tab, Cor.Preta));
-            ColocarNovaPeca('b', 8, new Torre(Tab, Cor.Preta));
-            ColocarNovaPeca('c', 1, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('h', 7, new Torre(Tab, Cor.Branca));
-            ColocarNovaPeca('d', 1, new Rei(Tab, Cor.Branca));
-
-
-
-            //    ColocarNovaPeca('a', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('b', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('c', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('d', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('e', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('f', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('g', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('h', 2, new Peao(Tab, Cor.Branca));
-            //    ColocarNovaPeca('a', 1, new Torre(Tab, Cor.Branca));
-            //    ColocarNovaPeca('b', 1, new Cavalo(Tab, Cor.Branca));
-            //    ColocarNovaPeca('c', 1, new Bispo(Tab, Cor.Branca));
-            //    ColocarNovaPeca('d', 1, new Rei(Tab, Cor.Branca));
-            //    ColocarNovaPeca('e', 1, new Dama(Tab, Cor.Branca));
-            //    ColocarNovaPeca('f', 1, new Bispo(Tab, Cor.Branca));
-            //    ColocarNovaPeca('g', 1, new Cavalo(Tab, Cor.Branca));
-            //    ColocarNovaPeca('h', 1, new Torre(Tab, Cor.Branca));
-
-            //    ColocarNovaPeca('a', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('b', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('c', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('d', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('e', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('f', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('g', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('h', 7, new Peao(Tab, Cor.Preta));
-            //    ColocarNovaPeca('a', 8, new Torre(Tab, Cor.Preta));
-            //    ColocarNovaPeca('b', 8, new Cavalo(Tab, Cor.Preta));
-            //    ColocarNovaPeca('c', 8, new Bispo(Tab, Cor.Preta));
-            //    ColocarNovaPeca('d', 8, new Rei(Tab, Cor.Preta));
-            //    ColocarNovaPeca('e', 8, new Dama(Tab, Cor.Preta));
-            //    ColocarNovaPeca('f', 8, new Bispo(Tab, Cor.Preta));
-            //    ColocarNovaPeca('g', 8, new Cavalo(Tab, Cor.Preta));
-            //    ColocarNovaPeca('h', 8, new Torre(Tab, Cor.Preta));
+            ColocarNovaPeca('a', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('b', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('c', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('d', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('e', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('f', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('g', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('h', 7, new Peao(Tab, Cor.Preta));
+            ColocarNovaPeca('a', 8, new Torre(Tab, Cor.Preta));
+            //ColocarNovaPeca('b', 8, new Cavalo(Tab, Cor.Preta));
+            //ColocarNovaPeca('c', 8, new Bispo(Tab, Cor.Preta));
+            ColocarNovaPeca('e', 8, new Rei(Tab, Cor.Preta, this));
+            //ColocarNovaPeca('d', 8, new Dama(Tab, Cor.Preta));
+            //ColocarNovaPeca('f', 8, new Bispo(Tab, Cor.Preta));
+            ColocarNovaPeca('g', 8, new Cavalo(Tab, Cor.Preta));
+            ColocarNovaPeca('h', 8, new Torre(Tab, Cor.Preta));
 
         }
     }
