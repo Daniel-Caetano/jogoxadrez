@@ -6,17 +6,20 @@
         public Cor Cor { get; protected set; }
         public int QteMovimentos { get; protected set; }
         public Tabuleiro Tab { get; protected set; }
-
         public Peca(Tabuleiro tab, Cor cor)
         {
-            this.Posicao = null;
-            this.Tab = tab;
-            this.Cor = cor;
-            this.QteMovimentos = 0;
+            Posicao = null;
+            Tab = tab;
+            Cor = cor;
+            QteMovimentos = 0;
         }
-        public void incrementarQteMoviemntos()
+        public void IncrementarQteMoviemntos()
         {
-            this.QteMovimentos++;
+            QteMovimentos++;
+        }
+        public void DecrementarQteMoviemntos()
+        {
+            QteMovimentos--;
         }
         public bool ExisteMovimentosPossiveis()
         {
